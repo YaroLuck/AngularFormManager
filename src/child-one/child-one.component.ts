@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {FormService} from '../form.service';
 import {NgIf} from '@angular/common';
 import {ChildThreeComponent} from '../child-three/child-three.component';
+import {ChildOneApiService} from '../child-one-api.service';
+import {FormManagerService} from '../../projects/ngx-form-manager/src/lib/ngx-form-manager.service';
 
 @Component({
   selector: 'app-child-one',
@@ -16,19 +17,29 @@ import {ChildThreeComponent} from '../child-three/child-three.component';
   styleUrl: './child-one.component.css'
 })
 export class ChildOneComponent {
-  form: FormGroup;
+  form!: FormGroup;
 
-  constructor(private fb: FormBuilder, private formService: FormService) {
+  constructor(
+    private fb: FormBuilder,
+    private formManagerService: FormManagerService,
+    private childOneApiService: ChildOneApiService
+  ) {}
+
+  ngOnInit(): void {
     this.form = this.fb.group({
-      name: ['', Validators.required]
+      name: [''],
+    });
+
+    // Регистрируем форму с её обработчиком
+    this.formManagerService.registerForm(this.form, (formData) => {
+      this.childOneApiService.addChildOne(formData).subscribe((response: any) => {
+        console.log('ChildOne added:', response);
+      });
     });
   }
 
-  ngOnInit() {
-    this.formService.registerForm(this.form);
-  }
-
-  ngOnDestroy() {
-    this.formService.unregisterForm(this.form);
+  ngOnDestroy(): void {
+    // Убираем форму из регистраций
+    this.formManagerService.unregisterForm(this.form);
   }
 }

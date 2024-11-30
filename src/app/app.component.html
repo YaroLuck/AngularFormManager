@@ -1,8 +1,8 @@
 <div class="container">
   <h1>Angular Form Management</h1>
   <button
-    [disabled]="!(formService.isValid$ | async)"
-    (click)="saveAll()"
+    [disabled]="!(formManagerService.isValid$ | async)"
+    (click)="onSave()"
   >Сохранить</button>
   <app-tabs></app-tabs>
   <router-outlet></router-outlet>

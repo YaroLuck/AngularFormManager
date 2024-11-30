@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {FormService} from '../form.service';
 import {AsyncPipe} from '@angular/common';
 import {TabsComponent} from '../tabs/tabs.component';
+import {FormManagerService} from '../../projects/ngx-form-manager/src/lib/ngx-form-manager.service';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +14,10 @@ import {TabsComponent} from '../tabs/tabs.component';
 export class AppComponent {
   title = 'AngularFormManager';
 
-  constructor(public formService: FormService) {}
+  constructor(public formManagerService: FormManagerService) {}
 
-  saveAll() {
-    this.formService.saveAll();
+  onSave(): void {
+    // Отправляем данные всех форм
+    this.formManagerService.submitForms();
   }
 }

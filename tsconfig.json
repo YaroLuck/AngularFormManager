@@ -5,6 +5,14 @@
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "strict": true,
+    "paths": {
+      "form-manager": [
+        "./dist/form-manager"
+      ],
+      "ngx-form-manager": [
+        "./dist/ngx-form-manager"
+      ]
+    },
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
