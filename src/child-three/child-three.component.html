@@ -1,0 +1,8 @@
+<h2>Child 3 Component</h2>
+<form [formGroup]="form">
+  <label>
+    Name:
+    <input formControlName="name" />
+  </label>
+  <div *ngIf="form.get('name')?.invalid">Name is required</div>
+</form>

@@ -1,0 +1,8 @@
+<h2>Form in Tab 2</h2>
+<form [formGroup]="form">
+  <label>
+    Email:
+    <input formControlName="email" />
+  </label>
+  <div *ngIf="form.get('email')?.invalid">Email is required</div>
+</form>

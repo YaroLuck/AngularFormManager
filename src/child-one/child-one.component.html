@@ -1,0 +1,10 @@
+<h2>Form in Tab 1</h2>
+<form [formGroup]="form">
+  <label>
+    Name:
+    <input formControlName="name" />
+  </label>
+  <div *ngIf="form.get('name')?.invalid">Name is required</div>
+</form>
+
+<app-child-three></app-child-three>
